@@ -1,15 +1,16 @@
 import numpy as np
 import yfinance as yf
-from dataclasses import dataclass
+import pandas as pd
+from dataclasses import dataclass, field
 
 
 @dataclass(frozen=True)
 class HistoricData:
-    dates: []
-    closes: np.array([])
-    opens: np.array([])
-    highs: np.array([])
-    lows: np.array([])
+    dates: list[pd.Timestamp]
+    closes: np.array
+    opens: np.array
+    highs: np.array
+    lows: np.array
 
 
 def import_history(config):
@@ -18,6 +19,7 @@ def import_history(config):
     history = ticker.history(period=config.period, interval=config.interval)
 
     dates = history.index.tolist()
+    print(type(dates[0]))
 
     closes = history['Close'].to_numpy()
     opens = history['Open'].to_numpy()
@@ -27,3 +29,5 @@ def import_history(config):
     stock = HistoricData(dates, closes, opens, highs, lows)
 
     return stock
+
+
