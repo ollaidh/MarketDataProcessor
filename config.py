@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass
-import unittest
+import argparse
 
 
 @dataclass(frozen=True)
@@ -14,8 +14,8 @@ def parse_config(parameters):
     return Config(parameters['company'], parameters['period'], parameters['interval'])
 
 
-def load_config_ffile(json_name):
-    with open(json_name, 'r') as json_file:
+def load_config_ffile(json_path):
+    with open(json_path, 'r') as json_file:
         stock_parameters = json.load(json_file)
     return parse_config(stock_parameters)
 

@@ -19,7 +19,6 @@ def import_history(config):
     history = ticker.history(period=config.period, interval=config.interval)
 
     dates = history.index.tolist()
-    print(type(dates[0]))
 
     closes = history['Close'].to_numpy()
     opens = history['Open'].to_numpy()
