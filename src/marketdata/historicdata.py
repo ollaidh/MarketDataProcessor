@@ -1,7 +1,9 @@
 import numpy as np
 import yfinance as yf
 import pandas as pd
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+
+from .config import Config
 
 
 @dataclass(frozen=True)
@@ -13,7 +15,7 @@ class HistoricData:
     lows: np.array
 
 
-def import_history(config):
+def import_historic_data(config: Config) -> HistoricData:
     ticker = yf.Ticker(config.company)
 
     history = ticker.history(period=config.period, interval=config.interval)

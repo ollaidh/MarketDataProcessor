@@ -1,5 +1,5 @@
 import unittest
-import config
+from marketdata import config
 
 
 class TestConfig(unittest.TestCase):
