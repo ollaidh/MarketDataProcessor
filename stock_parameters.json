@@ -1,5 +1,7 @@
 {
-  "company": "AAPL",
+  "tickers": [
+    "AAPL", "TSLA"
+  ],
   "period": "1y",
   "interval": "1d"
 }

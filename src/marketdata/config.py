@@ -4,13 +4,13 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class Config:
-    company: str
+    companies: list[str]
     period: str
     interval: str
 
 
 def parse_config(parameters):
-    return Config(parameters['company'], parameters['period'], parameters['interval'])
+    return Config(parameters['tickers'], parameters['period'], parameters['interval'])
 
 
 def load_config_ffile(json_path):
