@@ -8,6 +8,7 @@ from .config import Config
 
 @dataclass(frozen=True)
 class HistoricData:
+    company: str
     dates: list[pd.Timestamp]
     closes: np.array
     opens: np.array
@@ -15,20 +16,21 @@ class HistoricData:
     lows: np.array
 
 
-def import_historic_data(config: Config) -> HistoricData:
-    ticker = yf.Ticker(config.company)
+def import_historic_data(config: Config) -> list[HistoricData]:
+    result = []
+    companies = config.companies
 
-    history = ticker.history(period=config.period, interval=config.interval)
+    for company in companies:
+        ticker = yf.Ticker(company)
+        history = ticker.history(period=config.period, interval=config.interval)
+        dates = history.index.tolist()
+        closes = history['Close'].to_numpy()
+        opens = history['Open'].to_numpy()
+        highs = history['High'].to_numpy()
+        lows = history['Low'].to_numpy()
+        stock = HistoricData(company, dates, closes, opens, highs, lows)
+        result.append(stock)
 
-    dates = history.index.tolist()
-
-    closes = history['Close'].to_numpy()
-    opens = history['Open'].to_numpy()
-    highs = history['High'].to_numpy()
-    lows = history['Low'].to_numpy()
-
-    stock = HistoricData(dates, closes, opens, highs, lows)
-
-    return stock
+    return result
 
 
