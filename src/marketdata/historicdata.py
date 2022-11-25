@@ -1,7 +1,7 @@
 import numpy as np
 import yfinance as yf
-import pandas as pd
 from dataclasses import dataclass
+import datetime
 
 from .config import Config
 
@@ -9,7 +9,7 @@ from .config import Config
 @dataclass(frozen=True)
 class HistoricData:
     company: str
-    dates: list[pd.Timestamp]
+    dates: list[datetime.datetime]
     closes: np.array
     opens: np.array
     highs: np.array
@@ -23,7 +23,7 @@ def import_historic_data(config: Config) -> list[HistoricData]:
     for company in companies:
         ticker = yf.Ticker(company)
         history = ticker.history(period=config.period, interval=config.interval)
-        dates = history.index.tolist()
+        dates = history.index.to_pydatetime().tolist()
         closes = history['Close'].to_numpy()
         opens = history['Open'].to_numpy()
         highs = history['High'].to_numpy()

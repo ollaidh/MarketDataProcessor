@@ -1,3 +1,4 @@
+import datetime
 import unittest
 
 import pandas as pd
@@ -8,8 +9,8 @@ import numpy as np
 
 class TestHistoricData(unittest.TestCase):
     def test_create(self):
-        def dtyr(year: int) -> pd.Timestamp:  # create timestamp date from year only
-            return pd.Timestamp(year=year, month=1, day=1, hour=1, minute=1, second=1)
+        def dtyr(year: int) -> datetime.datetime:  # create timestamp date from year only
+            return datetime.datetime(year=year, month=1, day=1, hour=1, minute=1, second=1)
 
         hd1 = [historicdata.HistoricData(
             "IBM", [dtyr(2002), dtyr(2003), dtyr(2004)], np.array([10, 20, 30]), np.array([100, 200, 300]),
