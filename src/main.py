@@ -2,6 +2,7 @@ import sys
 
 import cmdline_parser
 import marketdata
+import processors
 
 import stock_plot
 import json

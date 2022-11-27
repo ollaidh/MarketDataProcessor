@@ -1,25 +1,20 @@
-import datetime
 import unittest
 
-import pandas as pd
-
 from marketdata import historicdata
+from marketdata.utils import date_from_year
 import numpy as np
 
 
 class TestHistoricData(unittest.TestCase):
     def test_create(self):
-        def dtyr(year: int) -> datetime.datetime:  # create timestamp date from year only
-            return datetime.datetime(year=year, month=1, day=1, hour=1, minute=1, second=1)
-
         hd1 = [historicdata.HistoricData(
-            "IBM", [dtyr(2002), dtyr(2003), dtyr(2004)], np.array([10, 20, 30]), np.array([100, 200, 300]),
+            "IBM", [date_from_year(2002), date_from_year(2003), date_from_year(2004)], np.array([10, 20, 30]), np.array([100, 200, 300]),
             np.array([1000, 2000, 3000]), np.array([1, 2, 3])),
             historicdata.HistoricData(
-                "TSLA", [dtyr(2002), dtyr(2003), dtyr(2004)], np.array([11, 21, 31]), np.array([110, 210, 310]),
+                "TSLA", [date_from_year(2002), date_from_year(2003), date_from_year(2004)], np.array([11, 21, 31]), np.array([110, 210, 310]),
                 np.array([1100, 2100, 3100]), np.array([111, 211, 311])),
             historicdata.HistoricData(
-                "APPL", [dtyr(2002), dtyr(2003), dtyr(2004)], np.array([10, 20, 30]), np.array([100, 200, 300]),
+                "APPL", [date_from_year(2002), date_from_year(2003), date_from_year(2004)], np.array([10, 20, 30]), np.array([100, 200, 300]),
                 np.array([1000, 2000, 3000]), np.array([1, 2, 3]))]
 
         # test hd1 case:

@@ -16,7 +16,7 @@ class HistoricData:
     lows: np.array
 
 
-def import_historic_data(config: Config) -> list[HistoricData]:
+def import_historic_data(config: Config) -> list:
     result = []
     companies = config.companies
 
