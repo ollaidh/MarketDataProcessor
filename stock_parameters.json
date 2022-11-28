@@ -3,5 +3,6 @@
     "AAPL", "TSLA"
   ],
   "period": "1y",
-  "interval": "1d"
+  "interval": "1d",
+  "price": "close"
 }

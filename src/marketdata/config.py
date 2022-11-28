@@ -7,10 +7,11 @@ class Config:
     companies: list[str]
     period: str
     interval: str
+    price: str
 
 
 def parse_config(parameters):
-    return Config(parameters['tickers'], parameters['period'], parameters['interval'])
+    return Config(parameters['tickers'], parameters['period'], parameters['interval'], parameters['price'])
 
 
 def load_config_ffile(json_path):

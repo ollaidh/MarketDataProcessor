@@ -10,10 +10,7 @@ from .config import Config
 class HistoricData:
     company: str
     dates: list[datetime.datetime]
-    closes: np.array
-    opens: np.array
-    highs: np.array
-    lows: np.array
+    price: np.array
 
 
 def import_historic_data(config: Config) -> list:
@@ -24,11 +21,17 @@ def import_historic_data(config: Config) -> list:
         ticker = yf.Ticker(company)
         history = ticker.history(period=config.period, interval=config.interval)
         dates = history.index.to_pydatetime().tolist()
-        closes = history['Close'].to_numpy()
-        opens = history['Open'].to_numpy()
-        highs = history['High'].to_numpy()
-        lows = history['Low'].to_numpy()
-        stock = HistoricData(company, dates, closes, opens, highs, lows)
+        if config.price == 'close':
+            price = history['Close'].to_numpy()
+        elif config.price == 'open':
+            price = history['Open'].to_numpy()
+        elif config.price == 'high':
+            price = history['High'].to_numpy()
+        elif config.price == 'low':
+            price = history['Low'].to_numpy()
+        else:
+            raise KeyError(f'Unknown price format: {config.price}')
+        stock = HistoricData(company, dates, price)
         result.append(stock)
 
     return result

@@ -12,8 +12,7 @@ class MyTestCase(unittest.TestCase):
 
         hd = marketdata.HistoricData(
             "IBM", [date_from_year(2002), date_from_year(2003), date_from_year(2004), date_from_year(2005),
-                    date_from_year(2006)], np.array([10, 20, 30, 15, 7]),
-            np.array([100, 200, 300, 100, 100]), np.array([1000, 2000, 3000, 1000, 1000]), np.array([1, 2, 3, 3, 3]))
+                    date_from_year(2006)], np.array([10, 20, 30, 15, 7]))
 
         self.assertEqual(processor.process(hd)['close_min'], 7)
         self.assertEqual(processor.process(hd)['date_min'], datetime.datetime(2006, 1, 1, 1, 1, 1))
