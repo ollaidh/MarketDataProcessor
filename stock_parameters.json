@@ -4,5 +4,7 @@
   ],
   "period": "1y",
   "interval": "1d",
-  "price": "close"
+  "price": [
+    "close", "open"
+  ]
 }

@@ -4,10 +4,10 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class Config:
-    companies: list[str]
+    tickers: list[str]
     period: str
     interval: str
-    price: str
+    price: list[str]
 
 
 def parse_config(parameters):
@@ -23,8 +23,3 @@ def load_config_ffile(json_path):
 def load_config_fstring(line):
     stock_parameters = json.loads(line)
     return parse_config(stock_parameters)
-
-
-if __name__ == '__main__':
-    pass
-

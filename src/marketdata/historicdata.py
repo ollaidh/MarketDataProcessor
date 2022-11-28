@@ -2,6 +2,7 @@ import numpy as np
 import yfinance as yf
 from dataclasses import dataclass
 import datetime
+import pandas as pd
 
 from .config import Config
 
@@ -13,24 +14,25 @@ class HistoricData:
     price: np.array
 
 
+def calc_average_price(history: pd.DataFrame, price_types: list) -> np.array:
+    mapping = {'close': 'Close', 'open': 'Open', 'high': 'High', 'low': 'Low'}
+    prices = []
+    for item in price_types:
+        key = mapping[item]
+        curr_price = history[key].to_numpy()
+        prices.append(curr_price)
+
+    result = np.mean(prices, axis=0)
+    return result
+
+
 def import_historic_data(config: Config) -> list:
     result = []
-    companies = config.companies
-
-    for company in companies:
+    for company in config.tickers:
         ticker = yf.Ticker(company)
         history = ticker.history(period=config.period, interval=config.interval)
         dates = history.index.to_pydatetime().tolist()
-        if config.price == 'close':
-            price = history['Close'].to_numpy()
-        elif config.price == 'open':
-            price = history['Open'].to_numpy()
-        elif config.price == 'high':
-            price = history['High'].to_numpy()
-        elif config.price == 'low':
-            price = history['Low'].to_numpy()
-        else:
-            raise KeyError(f'Unknown price format: {config.price}')
+        price = calc_average_price(history, config.price)
         stock = HistoricData(company, dates, price)
         result.append(stock)
 
