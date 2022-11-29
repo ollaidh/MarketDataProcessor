@@ -3,6 +3,7 @@ import unittest
 from marketdata import historicdata
 from marketdata.utils import date_from_years
 import numpy as np
+import pandas as pd
 
 
 class TestHistoricData(unittest.TestCase):
@@ -49,8 +50,11 @@ class TestHistoricData(unittest.TestCase):
         self.assertTrue((hd2[0].price == np.array([110, 120, 130, 140])).all())
         self.assertTrue((hd2[1].price == np.array([111, 121, 131, 141])).all())
 
-        # test calc_average_price function:
+        pddf = pd.DataFrame({'Close': [10, 20, 30], 'Open': [20, 40, 60]}, index=date_from_years([2012, 2013, 2014]))
 
+        # test calc_average_price function:
+        self.assertTrue((historicdata.calc_average_price(pddf, ['close', 'open']) == np.array([15, 30, 45])).all())
+        self.assertTrue((historicdata.calc_average_price(pddf, ['close']) == np.array([10, 20, 30])).all())
 
 
 if __name__ == '__main__':
