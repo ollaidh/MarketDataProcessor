@@ -7,11 +7,20 @@ import pandas as pd
 from .config import Config
 
 
+class InputSizeNotEqualError(Exception):
+    def __str__(self):
+        return 'Dates and prices arrays have different size!'
+
+
 @dataclass(frozen=True)
 class HistoricData:
     company: str
     dates: list[datetime.datetime]
     price: np.array
+
+    def __post_init__(self):
+        if len(self.dates) != self.price.size:
+            raise InputSizeNotEqualError
 
 
 def calc_average_price(history: pd.DataFrame, price_types: list) -> np.array:

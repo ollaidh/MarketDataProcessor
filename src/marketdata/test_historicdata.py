@@ -50,6 +50,13 @@ class TestHistoricData(unittest.TestCase):
         self.assertTrue((hd2[0].price == np.array([110, 120, 130, 140])).all())
         self.assertTrue((hd2[1].price == np.array([111, 121, 131, 141])).all())
 
+        # test exception InputSizeNotEqualError (Dates and prices arrays have different size):
+        self.assertRaises(historicdata.InputSizeNotEqualError,
+                          historicdata.HistoricData,
+                          "INST",
+                          date_from_years([2012, 2013, 2014]),
+                          np.array([112, 122, 132, 142]))
+
         pddf = pd.DataFrame({'Close': [10, 20, 30], 'Open': [20, 40, 60]}, index=date_from_years([2012, 2013, 2014]))
 
         # test calc_average_price function:
