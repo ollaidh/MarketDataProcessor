@@ -6,5 +6,5 @@
   "interval": "1d",
   "price": [
     "close", "open"],
-  "processor": "minmax"
+  "processor": "percdeltaminmax"
 }
