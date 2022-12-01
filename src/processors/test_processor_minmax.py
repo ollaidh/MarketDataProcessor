@@ -1,9 +1,9 @@
 import unittest
 import datetime
-import processor_minmax as prminmax
+import processors.processor_minmax as prminmax
 import marketdata
 import numpy as np
-from marketdata.utils import date_from_year
+from marketdata.utils import date_from_years
 
 
 class MyTestCase(unittest.TestCase):
@@ -11,8 +11,8 @@ class MyTestCase(unittest.TestCase):
         processor = prminmax.ProcessorMinMax()
 
         hd = marketdata.HistoricData(
-            "IBM", [date_from_year(2002), date_from_year(2003), date_from_year(2004), date_from_year(2005),
-                    date_from_year(2006)], np.array([10, 20, 30, 15, 7]))
+            "IBM", date_from_years([2002, 2003, 2004, 2005, 2006]), np.array([10, 20, 30, 15, 7])
+        )
 
         self.assertEqual(processor.process(hd)['close_min'], 7)
         self.assertEqual(processor.process(hd)['date_min'], datetime.datetime(2006, 1, 1, 1, 1, 1))
