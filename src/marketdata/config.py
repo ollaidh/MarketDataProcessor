@@ -8,10 +8,12 @@ class Config:
     period: str
     interval: str
     price: list[str]
+    processor: str
 
 
 def parse_config(parameters):
-    return Config(parameters['tickers'], parameters['period'], parameters['interval'], parameters['price'])
+    return Config(parameters['tickers'], parameters['period'], parameters['interval'], parameters['price'],
+                  parameters['processor'])
 
 
 def load_config_ffile(json_path):
