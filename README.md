@@ -1,5 +1,7 @@
 # Market data processor
 
+[![Run tests](https://github.com/ollaidh/MarketDataProcessor/actions/workflows/test.yml/badge.svg)](https://github.com/ollaidh/MarketDataProcessor/actions/workflows/test.yml)
+
 A simple python tool that gets market data from Yahoo Finance API and processes it
 
 ## Prerequisites
