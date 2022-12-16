@@ -3,6 +3,7 @@ import yfinance as yf
 from dataclasses import dataclass
 import datetime
 import pandas as pd
+import json
 
 from .config import Config
 

@@ -20,6 +20,9 @@ if __name__ == '__main__':
         elif stock_parameters.processor == 'percdeltaminmax':
             process = processors.ProcessorPercDeltaMinMax()
             print(process.process(company))
+        elif stock_parameters.processor == 'volatility':
+            process = processors.ProcessorVolatility()
+            print(process.process(company))
 
 
 
