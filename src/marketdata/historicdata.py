@@ -40,7 +40,10 @@ def import_historic_data(config: Config) -> list:
     result = []
     for company in config.tickers:
         ticker = yf.Ticker(company)
-        history = ticker.history(period=config.period, interval=config.interval)
+        if config.period is not None:
+            history = ticker.history(period=config.period, interval=config.interval)
+        else:
+            history = ticker.history(start=config.start_date, end=config.end_date, interval=config.interval)
         dates = history.index.to_pydatetime().tolist()
         price = calc_average_price(history, config.price)
         stock = HistoricData(company, dates, price)

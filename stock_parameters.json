@@ -1,10 +1,14 @@
 {
   "tickers": [
-    "AAPL", "TSLA"
+    "AAPL", "IBM"
   ],
   "period": "1y",
+  "start_date": "2021-12-17",
+  "end_date": "2022-02-18",
   "interval": "1d",
   "price": [
     "close", "open"],
-  "processor": "volatility"
+  "processor": {
+    "type": "volatility"
+    }
 }
