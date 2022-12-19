@@ -32,7 +32,6 @@ def parse_config(parameters: dict):
 def load_config_ffile(json_path):
     with open(json_path, 'r') as json_file:
         stock_parameters = json.load(json_file)
-    # print(parse_config(stock_parameters))
     return parse_config(stock_parameters)
 
 
