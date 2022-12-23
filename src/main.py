@@ -15,19 +15,19 @@ def main():
     data = md.import_historic_data(stock_parameters)
     # print(data)
 
+    # execute processor, which is set in json:
+    processors_available = {
+        'minmax': processors.ProcessorMinMax(),
+        'percdelta': processors.ProcessorPercDelta,
+        'percdeltaminmax': processors.ProcessorPercDeltaMinMax,
+        'volatility': processors.ProcessorVolatility
+    }
+
     for company in data:
-        if stock_parameters.processor == 'minmax':
-            process = processors.ProcessorMinMax()
-            print(process.process(company))
-        elif stock_parameters.processor == 'percdelta':
-            process = processors.ProcessorPercDelta()
-            print(process.process(company))
-        elif stock_parameters.processor == 'percdeltaminmax':
-            process = processors.ProcessorPercDeltaMinMax()
-            print(process.process(company))
-        elif stock_parameters.processor['type'] == 'volatility':
-            process = processors.ProcessorVolatility()
-            print(process.process(company))
+        process = processors_available[stock_parameters.processor['type']]()
+        print(company.company, process.process(company))
+
+
 
     # prints on the plot:
     # stock_plot.draw_plot(dates, closes)
