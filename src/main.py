@@ -17,15 +17,16 @@ def main():
 
     # execute processor, which is set in json:
     processors_available = {
-        'minmax': processors.ProcessorMinMax(),
+        'minmax': processors.ProcessorMinMax,
         'percdelta': processors.ProcessorPercDelta,
         'percdeltaminmax': processors.ProcessorPercDeltaMinMax,
         'volatility': processors.ProcessorVolatility
     }
 
     for company in data:
-        process = processors_available[stock_parameters.processor['type']]()
-        print(company.company, process.process(company))
+        for pr in stock_parameters.processor['type']:
+            process = processors_available[pr]()
+            print(company.company, process.process(company))
 
 
 

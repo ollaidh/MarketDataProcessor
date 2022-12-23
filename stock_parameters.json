@@ -8,6 +8,6 @@
   "price": [
     "close", "open"],
   "processor": {
-    "type": "volatility"
+    "type": ["volatility", "minmax"]
     }
 }
