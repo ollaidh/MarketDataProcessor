@@ -11,6 +11,21 @@ def main():
     except md.config.InvalidPeriodParameters as err:
         print(err)
         return
+    except md.config.NoTicker as err:
+        print(err)
+        return
+    except md.config.NoPeriod as err:
+        print(err)
+        return
+    except md.config.NoInterval as err:
+        print(err)
+        return
+    except md.config.NoPrice as err:
+        print(err)
+        return
+    except md.config.NoProcessor as err:
+        print(err)
+        return
 
     data = md.import_historic_data(stock_parameters)
     # print(data)
